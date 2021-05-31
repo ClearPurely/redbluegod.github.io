@@ -1,2 +1,0 @@
-# RedBlueGod.github.io
-myblog
