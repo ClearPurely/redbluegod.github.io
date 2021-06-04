@@ -1,0 +1,17 @@
+.a1 {
+    text-align: right;
+    display: block;
+    width: 60%;
+}
+
+.box {
+    margin: 10% auto;
+    margin-top: 0px;
+    width: 70%;
+}
+
+hr {
+    height: 5px;
+    border: none;
+    border-top: orangered solid;
+}

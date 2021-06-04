@@ -1,0 +1,17 @@
+h1 {
+    text-align: center;
+}
+
+.box {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+.box2 {
+    margin: 0 auto;
+}
+
+html {
+    background-color: cadetblue;
+}

@@ -1,0 +1,26 @@
+.abc {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    text-align: left;
+    width: 250px;
+}
+
+h1 {
+    text-align: center;
+    color: dodgerblue;
+}
+
+html {
+    background-image: url("../image/1.jpg");
+}
+
+.color0 {
+    font-size: 20px;
+    color: green;
+}
+
+.color1 {
+    color: honeydew;
+    font-size: 16px;
+}

@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+}
+
+.abc {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+}
+
+hr {
+    height: 5px;
+    border: none;
+    border-top: orangered solid;
+    width: 70%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    list-style-type: none;
+    display: inline;
+    background-color: steelblue;
+    border: 1px black solid;
+    padding: 5px 20px;
+    margin: 0 10px;
+}
