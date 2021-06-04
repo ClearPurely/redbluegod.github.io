@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="简介：暂无">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言编程重难点5">
+<meta property="og:url" content="http://example.com/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介：暂无">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-04T07:18:23.050Z">
+<meta property="article:modified_time" content="2021-06-04T07:19:40.010Z">
+<meta property="article:author" content="Redblue God">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C语言编程重难点5 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">沉梦昂志</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="Redblue God">
+      <meta itemprop="description" content="记录我的学习轨迹">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言编程重难点5
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-03 23:18:23 / 修改时间：23:19:40" itemprop="dateCreated datePublished" datetime="2021-06-03T23:18:23-08:00">2021-06-03</time>
+            </span>
+
+          
+            <span id="/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-5/" class="post-meta-item leancloud_visitors" data-flag-title="C语言编程重难点5" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>简介：暂无</p>
+<span id="more"></span>
+
+<h2 id="练习-结构体嵌套二级指针"><a href="#练习-结构体嵌套二级指针" class="headerlink" title="练习 结构体嵌套二级指针"></a>练习 结构体嵌套二级指针</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Teacher</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> * name;</span><br><span class="line">	<span class="keyword">char</span> ** Students;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">allocateSpace</span><span class="params">( struct Teacher *** teachers)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Teacher</span> ** <span class="title">pArray</span> =</span> <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct Teacher *) * <span class="number">3</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//给每个老师分配空间</span></span><br><span class="line">		pArray[i] =  <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct Teacher));</span><br><span class="line">		<span class="comment">//给每个老师姓名 分配空间</span></span><br><span class="line">		pArray[i]-&gt;name = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)* <span class="number">64</span>);</span><br><span class="line">		<span class="built_in">sprintf</span>(pArray[i]-&gt;name, <span class="string">&quot;Teacher_%d&quot;</span>, i + <span class="number">1</span>);</span><br><span class="line">		<span class="comment">//给老师带的学生的数组分配空间</span></span><br><span class="line">		pArray[i]-&gt;Students =  <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span> *)* <span class="number">4</span>);</span><br><span class="line">		<span class="comment">//给4个学生在分配内存，并且赋值</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			pArray[i]-&gt;Students[j] = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)* <span class="number">64</span>);</span><br><span class="line">			<span class="built_in">sprintf</span>(pArray[i]-&gt;Students[j], <span class="string">&quot;%s_Student_%d&quot;</span>, pArray[i]-&gt;name, j + <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	*teachers = pArray;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showArray</span><span class="params">(struct Teacher ** pArray, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, pArray[i]-&gt;name);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;     %s\n&quot;</span>, pArray[i]-&gt;Students[j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">freeSpace</span><span class="params">(struct Teacher ** pArray , <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//释放老师姓名</span></span><br><span class="line">		<span class="keyword">if</span> (pArray[i]-&gt;name != <span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">free</span>(pArray[i]-&gt;name);</span><br><span class="line">			pArray[i]-&gt;name = <span class="literal">NULL</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//释放每个学生</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (pArray[i]-&gt;Students[j] != <span class="literal">NULL</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">free</span>(pArray[i]-&gt;Students[j]);</span><br><span class="line">				pArray[i]-&gt;Students[j] = <span class="literal">NULL</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//释放学生数组</span></span><br><span class="line">		<span class="built_in">free</span>(pArray[i]-&gt;Students);</span><br><span class="line">		pArray[i]-&gt;Students = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="comment">//释放老师</span></span><br><span class="line">		<span class="built_in">free</span>(pArray[i]);</span><br><span class="line">		pArray[i] = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//释放老师数组</span></span><br><span class="line">	<span class="built_in">free</span>(pArray);</span><br><span class="line">	pArray = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Teacher</span> ** <span class="title">pArray</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="comment">//分配内存</span></span><br><span class="line">	allocateSpace(&amp;pArray);</span><br><span class="line">	<span class="comment">//打印数组</span></span><br><span class="line">	showArray(pArray , <span class="number">3</span>);</span><br><span class="line">	<span class="comment">//释放内存</span></span><br><span class="line">	freeSpace(pArray,<span class="number">3</span>);</span><br><span class="line">	pArray = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="结构体偏移量"><a href="#结构体偏移量" class="headerlink" title="结构体偏移量"></a>结构体偏移量</h2><p>可以利用offsetof来计算结构体中属性的偏移</p>
+<p>也可以通过地址的相加运算 计算偏移量</p>
+<p>结构体嵌套结构体</p>
+<h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><p>​    <strong>内存对齐原因：以空间换时间</strong></p>
+<h4 id="对于自定义数据类型对齐规则："><a href="#对于自定义数据类型对齐规则：" class="headerlink" title="对于自定义数据类型对齐规则："></a>对于自定义数据类型对齐规则：</h4><p>​    //1、从第一个属性开始 偏移为0 </p>
+<p>​    //2、第二个属性开始，地址要放在 该类型整数倍  与 对齐模数比 取小的值 的整数倍上</p>
+<p>​    //3、所有的属性都计算结束后，整体再做二次对齐，整体需要放在属性中最大类型 与 对齐模数比 取小的值的整数倍上</p>
+<h4 id="如果查看对齐模数"><a href="#如果查看对齐模数" class="headerlink" title="如果查看对齐模数"></a>如果查看对齐模数</h4><p>​    #pragma pack(show)     设置对齐模数，包括对嵌套结构也生效</p>
+<p>​    默认对齐模数  是8，可以将对齐模数改为 2的n次方</p>
+<p>当结构起中嵌套结构体时，子结构体只要放在子结构体中最大数据类型的整数倍上即可。</p>
+<h2 id="文件读写回顾"><a href="#文件读写回顾" class="headerlink" title="文件读写回顾"></a>文件读写回顾</h2><h3 id="按照字符进行读写"><a href="#按照字符进行读写" class="headerlink" title="按照字符进行读写"></a>按照字符进行读写</h3><p>写文件 fputc</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fputc</span><span class="params">(<span class="keyword">int</span> ch, FILE * stream)</span></span>;</span><br><span class="line"><span class="comment">//功能：将ch转换为unsigned char后写入stream指定的文件中</span></span><br></pre></td></tr></table></figure>
+
+<p>读文件 fgetc</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fgetc</span><span class="params">(FILE * stream)</span></span>;</span><br><span class="line"><span class="comment">//功能：从stream指定的文件中读取一个字符</span></span><br></pre></td></tr></table></figure>
+
+<p>文件结尾 EOF  END OF FILE</p>
+<h3 id="按行读写"><a href="#按行读写" class="headerlink" title="按行读写"></a>按行读写</h3><p>写文件 fputs</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fputs</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> * str, FILE * stream)</span></span>;</span><br><span class="line"><span class="comment">//功能：将str所指定的字符串写入到stream指定的文件中，字符串结束符 &#x27;\0&#x27;  不写入文件。</span></span><br></pre></td></tr></table></figure>
+
+<p>读文件 fgets</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">fgets</span><span class="params">(<span class="keyword">char</span> * str, <span class="keyword">int</span> size, FILE * stream)</span></span>;</span><br><span class="line"><span class="comment">//功能：从stream指定的文件内读入字符，保存到str所指定的内存空间，直到出现换行字符、读到文件结尾或是已读了size - 1个字符为止，最后会自动加上字符 &#x27;\0&#x27; 作为字符串结束。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="按块读写"><a href="#按块读写" class="headerlink" title="按块读写"></a>按块读写</h3><p>写文件 fwrite     参数1 数据地址  参数2 块大小  参数3 块个数  参数4 文件指针</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">fwrite</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, FILE *stream)</span></span>;</span><br><span class="line"><span class="comment">//功能：以数据块的方式给文件写入内容</span></span><br><span class="line"><span class="comment">//参数：</span></span><br><span class="line"><span class="comment">//	ptr：准备写入文件数据的地址</span></span><br><span class="line"><span class="comment">//	size： size_t 为 unsigned int类型，此参数指定写入文件内容的块数据大小</span></span><br><span class="line"><span class="comment">//	nmemb：写入文件的块数，写入文件数据总大小为：size * nmemb</span></span><br><span class="line"><span class="comment">//	stream：已经打开的文件指针</span></span><br></pre></td></tr></table></figure>
+
+<p>读文件 fread</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">fread</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, FILE *stream)</span></span>;</span><br><span class="line"><span class="comment">//功能：以数据块的方式从文件中读取内容</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="按格式化读写"><a href="#按格式化读写" class="headerlink" title="按格式化读写"></a>按格式化读写</h3><p>写文件fprintf</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fprintf</span><span class="params">(FILE * stream, <span class="keyword">const</span> <span class="keyword">char</span> * format, ...)</span></span>;</span><br><span class="line"><span class="comment">//功能：根据参数format字符串来转换并格式化数据，然后将结果输出到stream指定的文件中，指定出现字符串结束符 &#x27;\0&#x27;  为止。</span></span><br></pre></td></tr></table></figure>
+
+<p>读文件fscanf</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fscanf</span><span class="params">(FILE * stream, <span class="keyword">const</span> <span class="keyword">char</span> * format, ...)</span></span>;</span><br><span class="line"><span class="comment">//功能：从stream指定的文件读取字符串，并根据参数format字符串来转换并格式化数据。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="随机位置读写"><a href="#随机位置读写" class="headerlink" title="随机位置读写"></a>随机位置读写</h3><p>fseek （文件指针，偏移， 起始位置 SEEK_SET SEEK_END SEEK_CUR）、</p>
+<p>rewind （文件指针） 将文件光标置首</p>
+<p>error宏 全局变量  perror打印宏的提示错误信息</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fseek</span><span class="params">(FILE *stream, <span class="keyword">long</span> offset, <span class="keyword">int</span> whence)</span></span>;</span><br><span class="line"><span class="comment">//功能：移动文件流（文件光标）的读写位置。</span></span><br><span class="line"><span class="comment">//参数：</span></span><br><span class="line"><span class="comment">//	stream：已经打开的文件指针</span></span><br><span class="line"><span class="comment">//	offset：根据whence来移动的位移数（偏移量），可以是正数，也可以负数，如果正数，则相对于whence往右移动，如果是负数，则相对于whence往左移动。如果向前移动的字节数超过了文件开头则出错返回，如果向后移动的字节数超过了文件末尾，再次写入时将增大文件尺寸。</span></span><br><span class="line"><span class="comment">//	whence：其取值如下：</span></span><br><span class="line"><span class="comment">//		SEEK_SET：从文件开头移动offset个字节</span></span><br><span class="line"><span class="comment">//		SEEK_CUR：从当前位置移动offset个字节</span></span><br><span class="line"><span class="comment">//		SEEK_END：从文件末尾移动offset个字节</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">feof</span><span class="params">(FILE * stream)</span></span>;</span><br><span class="line"><span class="comment">//功能：检测是否读取到了文件结尾。判断的是最后一次“读操作的内容”，不是当前位置内容(上一个内容)。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rewind</span><span class="params">(FILE * stream)</span></span>;</span><br><span class="line"></span><br><span class="line">perror(<span class="keyword">char</span> *);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Windows和Linux文本文件区别"><a href="#Windows和Linux文本文件区别" class="headerlink" title="Windows和Linux文本文件区别"></a>Windows和Linux文本文件区别</h3><p>b是二进制模式的意思，b只是在Windows有效，在Linux用r和rb的结果是一样的</p>
+<p>Unix和Linux下所有的文本文件行都是\n结尾，而Windows所有的文本文件行都是\r\n结尾</p>
+<p>在Windows平台下，以“文本”方式打开文件，不加b：</p>
+<p>当读取文件的时候，系统会将所有的 “\r\n” 转换成 “\n”</p>
+<p>当写入文件的时候，系统会将 “\n” 转换成 “\r\n” 写入 </p>
+<p>以”二进制”方式打开文件，则读\写都不会进行这样的转换</p>
+<p>在Unix/Linux平台下，“文本”与“二进制”模式没有区别，”\r\n” 作为两个字符原样输入输出</p>
+<h2 id="文件读写注意事项"><a href="#文件读写注意事项" class="headerlink" title="文件读写注意事项"></a>文件读写注意事项</h2><p>当按照字符的方式读文件时候，通常利用判断EOF获取是否读到文件尾</p>
+<p>当对自定义数据类型写入文件时，<strong>不要将指针写入到文件里</strong>，<strong>要将指针指向的内容写入</strong></p>
+<h2 id="练习-配置文件读写"><a href="#练习-配置文件读写" class="headerlink" title="练习 配置文件读写"></a>练习 配置文件读写</h2><p>需求：</p>
+<p>​    将文件中的有效内容截取出来，并且放入到一个键值对的数组中struct ConfigInfo { char key[64] ; char value[64] };</p>
+<p>获取有效行数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取有效行数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getFileLine</span><span class="params">(<span class="keyword">char</span> * fileName)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FILE * file = fopen(fileName, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span> (file == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span> ;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> buf[<span class="number">1024</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> lines = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (fgets(buf, <span class="number">1024</span>, file) != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//如果是有效行 才统计</span></span><br><span class="line">		<span class="keyword">if</span> (isValidLine(buf))</span><br><span class="line">		&#123;</span><br><span class="line">			lines++;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	fclose(file);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> lines;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//判断当前行是否有效</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isValidLine</span><span class="params">(<span class="keyword">char</span> * str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (str[<span class="number">0</span>] == <span class="string">&#x27; &#x27;</span> || str[<span class="number">0</span>] == <span class="string">&#x27;\0&#x27;</span> ||  <span class="built_in">strchr</span>(str,<span class="string">&#x27;:&#x27;</span>) == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//无效数据 都返回假</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>判断当前行是否有效</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断当前行是否有效</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isValidLine</span><span class="params">(<span class="keyword">char</span>* str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (str[<span class="number">0</span>] == <span class="string">&#x27;\n&#x27;</span> || str[<span class="number">0</span>] == <span class="string">&#x27;\0&#x27;</span> || <span class="built_in">strchr</span>(str, <span class="string">&#x27;:&#x27;</span>) == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//无效数据 都返回假</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解析数据 parseFile</p>
+<p>​    将有效数据放入到数组中，数组在堆区开辟</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解析文件</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">parseFile</span><span class="params">(<span class="keyword">char</span>* filePath, <span class="keyword">int</span> lines, struct ConfigInfo** configInfo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ConfigInfo</span>* <span class="title">info</span> =</span> <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct ConfigInfo) * lines);</span><br><span class="line">	<span class="keyword">if</span> (info == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	FILE* file = fopen(filePath, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">	<span class="keyword">char</span> buf[<span class="number">1024</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> page = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (fgets(buf, <span class="number">1024</span>, file) != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//解析数据  有效数据才解析</span></span><br><span class="line">		<span class="comment">// heroName:aaaa\n</span></span><br><span class="line">		<span class="keyword">if</span> (isValidLine(buf))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">memset</span>(info[index].key, <span class="number">0</span>, <span class="number">64</span>);</span><br><span class="line">			<span class="built_in">memset</span>(info[index].value, <span class="number">0</span>, <span class="number">64</span>);</span><br><span class="line">			<span class="keyword">char</span> str1[<span class="number">64</span>];</span><br><span class="line">			<span class="keyword">char</span> str2[<span class="number">64</span>];</span><br><span class="line">			<span class="built_in">sscanf</span>(buf, <span class="string">&quot;%[^:]:%*[^:]&quot;</span>, str1);</span><br><span class="line">			<span class="built_in">sscanf</span>(buf, <span class="string">&quot;%*[^:]:%[^:]&quot;</span>, str2);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, str1);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, str2);</span><br><span class="line">			<span class="built_in">strcpy</span>(info[index].key, str1);</span><br><span class="line">			<span class="built_in">strcpy</span>(info[index].value, str2);</span><br><span class="line">			index++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">memset</span>(buf, <span class="number">0</span>, <span class="number">1024</span>);</span><br><span class="line">		page++;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	*configInfo = info;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据key获取value  getInfoByKey</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据索引值 获取 实值 </span></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">getInfoByKey</span><span class="params">(<span class="keyword">char</span>* key, struct ConfigInfo* configInfo, <span class="keyword">int</span> line)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; line; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">strcmp</span>(key, configInfo[i].key) == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> configInfo[i].value;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>释放内存 freeSpace</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//释放信息</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">freeSpace</span><span class="params">(struct ConfigInfo* configInfo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (configInfo != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">free</span>(configInfo);</span><br><span class="line">		configInfo = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">parseStart</span><span class="params">(<span class="keyword">char</span>* filePath)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> line = getFileLine(filePath);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;文件的有效行数为：%d\n&quot;</span>, line);</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ConfigInfo</span>* <span class="title">pArray</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    parseFile(filePath, line, &amp;pArray);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//测试 根据key 访问value</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;heroId = %s\n&quot;</span>, getInfoByKey(<span class="string">&quot;heroId&quot;</span>, pArray, line));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;heroName = %s\n&quot;</span>, getInfoByKey(<span class="string">&quot;heroName&quot;</span>, pArray, line));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;heroAtk = %s\n&quot;</span>, getInfoByKey(<span class="string">&quot;heroAtk&quot;</span>, pArray, line));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;heroDef = %s\n&quot;</span>, getInfoByKey(<span class="string">&quot;heroDef&quot;</span>, pArray, line));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;heroInfo = %s\n&quot;</span>, getInfoByKey(<span class="string">&quot;heroInfo&quot;</span>, pArray, line));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-4/" rel="prev" title="C语言编程重难点4">
+      <i class="fa fa-chevron-left"></i> C语言编程重难点4
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-6/" rel="next" title="C语言编程重难点6">
+      C语言编程重难点6 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-%E7%BB%93%E6%9E%84%E4%BD%93%E5%B5%8C%E5%A5%97%E4%BA%8C%E7%BA%A7%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">练习 结构体嵌套二级指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">结构体偏移量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90"><span class="nav-number">3.</span> <span class="nav-text">内存对齐</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AF%B9%E9%BD%90%E8%A7%84%E5%88%99%EF%BC%9A"><span class="nav-number">3.0.1.</span> <span class="nav-text">对于自定义数据类型对齐规则：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%9F%A5%E7%9C%8B%E5%AF%B9%E9%BD%90%E6%A8%A1%E6%95%B0"><span class="nav-number">3.0.2.</span> <span class="nav-text">如果查看对齐模数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%9B%9E%E9%A1%BE"><span class="nav-number">4.</span> <span class="nav-text">文件读写回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%85%A7%E5%AD%97%E7%AC%A6%E8%BF%9B%E8%A1%8C%E8%AF%BB%E5%86%99"><span class="nav-number">4.1.</span> <span class="nav-text">按照字符进行读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E8%A1%8C%E8%AF%BB%E5%86%99"><span class="nav-number">4.2.</span> <span class="nav-text">按行读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E5%9D%97%E8%AF%BB%E5%86%99"><span class="nav-number">4.3.</span> <span class="nav-text">按块读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%AF%BB%E5%86%99"><span class="nav-number">4.4.</span> <span class="nav-text">按格式化读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E4%BD%8D%E7%BD%AE%E8%AF%BB%E5%86%99"><span class="nav-number">4.5.</span> <span class="nav-text">随机位置读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E5%92%8CLinux%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%8C%BA%E5%88%AB"><span class="nav-number">4.6.</span> <span class="nav-text">Windows和Linux文本文件区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">5.</span> <span class="nav-text">文件读写注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99"><span class="nav-number">6.</span> <span class="nav-text">练习 配置文件读写</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Redblue God"
+      src="/images/1.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Redblue God</p>
+  <div class="site-description" itemprop="description">记录我的学习轨迹</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Redblue God</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ooaYU06WA0sgNOwlzjgNzpn3-gzGzoHsz# <your app id>","app_key":"HUgD8AbO3HwobapDfm5o9jO8# <your app key>","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

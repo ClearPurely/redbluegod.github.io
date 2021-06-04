@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="简介：暂无">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言编程重难点2">
+<meta property="og:url" content="http://example.com/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介：暂无">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-04T06:55:06.948Z">
+<meta property="article:modified_time" content="2021-06-04T07:14:14.432Z">
+<meta property="article:author" content="Redblue God">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C语言编程重难点2 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">沉梦昂志</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="Redblue God">
+      <meta itemprop="description" content="记录我的学习轨迹">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言编程重难点2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-03 22:55:06 / 修改时间：23:14:14" itemprop="dateCreated datePublished" datetime="2021-06-03T22:55:06-08:00">2021-06-03</time>
+            </span>
+
+          
+            <span id="/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-2/" class="post-meta-item leancloud_visitors" data-flag-title="C语言编程重难点2" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>简介：暂无</p>
+<span id="more"></span>
+
+<h2 id="函数调用流程"><a href="#函数调用流程" class="headerlink" title="函数调用流程"></a>函数调用流程</h2><h3 id="宏函数"><a href="#宏函数" class="headerlink" title="宏函数"></a>宏函数</h3><p>​        在一定程度上会比普通函数效率高，普通函数会有入栈和出栈的时间开销</p>
+<p>​        将比较频繁短小的函数 写为宏函数，直接跑源码</p>
+<p>​        优点： 以空间换时间</p>
+<h3 id="调用惯例"><a href="#调用惯例" class="headerlink" title="调用惯例"></a>调用惯例</h3><p>​    主调函数和被调函数都必须有一致的约定，才可以正确的调用函数，这个约定我们称为调用惯例</p>
+<p>​    调用惯例包含的内容： 出栈方、参数的传入顺序、函数名称的修饰</p>
+<p>​    c和c++下默认的调用惯例为 cdecl</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//宏函数注意:保证运算的完整性</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MYADD(x,y) ((x)+(y))</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>调用惯例</th>
+<th>出栈方</th>
+<th>参数传递</th>
+<th>名字修饰</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cdecl</td>
+<td>函数调用方</td>
+<td>从右至左参数入栈</td>
+<td>下划线+函数名</td>
+</tr>
+<tr>
+<td>stdcall</td>
+<td>函数本身</td>
+<td>从右至左参数入栈</td>
+<td>下划线+函数名+@+参数字节数</td>
+</tr>
+<tr>
+<td>fastcall</td>
+<td>函数本身</td>
+<td>前两个参数由寄存器传递，其余参数通过堆栈传递。</td>
+<td>@+函数名+@+参数的字节数</td>
+</tr>
+<tr>
+<td>pascal</td>
+<td>函数本身</td>
+<td>从左至右参数入栈</td>
+<td>较为复杂，参见相关文档</td>
+</tr>
+</tbody></table>
+<h2 id="空指针和野指针"><a href="#空指针和野指针" class="headerlink" title="空指针和野指针"></a>空指针和野指针</h2><h3 id="空指针-—不允许向NULL和非法地址拷贝内存"><a href="#空指针-—不允许向NULL和非法地址拷贝内存" class="headerlink" title="空指针 —不允许向NULL和非法地址拷贝内存"></a>空指针 —不允许向NULL和非法地址拷贝内存</h3><h3 id="野指针"><a href="#野指针" class="headerlink" title="野指针"></a>野指针</h3><p>​    未初始化指针</p>
+<p>​    malloc后也free了，但是指针没有置空</p>
+<p>​    指针操作超越变量作用域</p>
+<h3 id="空指针可以重复释放-，但是野指针不可以重复释放"><a href="#空指针可以重复释放-，但是野指针不可以重复释放" class="headerlink" title="空指针可以重复释放 ，但是野指针不可以重复释放"></a>空指针可以重复释放 ，但是野指针不可以重复释放</h3><h2 id="指针的步长"><a href="#指针的步长" class="headerlink" title="指针的步长"></a>指针的步长</h2><p>指针变量+1 之后 跳跃的字节数量</p>
+<p>解引用的时候，取的字节数</p>
+<p>对自定义数据类型进行练习</p>
+<p>​    如果获取自定义数据类型中属性的偏移</p>
+<p>​    offsetof( 结构体 ， 属性 )</p>
+<p>​    头文件 #include&lt;stddef.h&gt;</p>
+<h2 id="指针的间接赋值"><a href="#指针的间接赋值" class="headerlink" title="指针的间接赋值"></a>指针的间接赋值</h2><p>满足条件：</p>
+<p> 一个普通变量和一个指针变量（或者一个实参一个形参）</p>
+<p>建立关系</p>
+<p>通过 * 进行赋值</p>
+<h2 id="指针做函数参数的输入输出特性"><a href="#指针做函数参数的输入输出特性" class="headerlink" title="指针做函数参数的输入输出特性"></a>指针做函数参数的输入输出特性</h2><p>输入特性：在主调函数中分配内存，被调函数使用</p>
+<p>输出特性：被调函数中分配内存，主调函数使用</p>
+<h2 id="字符串强化训练"><a href="#字符串强化训练" class="headerlink" title="字符串强化训练"></a>字符串强化训练</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str1[] = &#123; <span class="string">&#x27;h&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;o&#x27;</span> , <span class="string">&#x27;\0&#x27;</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>字符串是有结束标志 \0</p>
+<h3 id="利用三种方式对字符串进行拷贝"><a href="#利用三种方式对字符串进行拷贝" class="headerlink" title="利用三种方式对字符串进行拷贝"></a>利用三种方式对字符串进行拷贝</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//拷贝方法1	利用[]</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">copy_string01</span><span class="params">(<span class="keyword">char</span>* dest, <span class="keyword">char</span>* source )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; source[i] != <span class="string">&#x27;\0&#x27;</span>;i++)&#123;</span><br><span class="line">		dest[i] = source[i];</span><br><span class="line">	&#125;</span><br><span class="line">	source[++i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//拷贝方法2	利用指针</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">copy_string02</span><span class="params">(<span class="keyword">char</span>* dest, <span class="keyword">char</span>* source)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (*source != <span class="string">&#x27;\0&#x27;</span>)&#123;</span><br><span class="line">		*dest = *source;</span><br><span class="line">		source++;</span><br><span class="line">		dest++;</span><br><span class="line">	&#125;</span><br><span class="line">    *dest = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//拷贝方法3	利用while (*dest++ = *source++)&#123;&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">copy_string03</span><span class="params">(<span class="keyword">char</span>* dest, <span class="keyword">char</span>* source)</span></span>&#123;</span><br><span class="line">	<span class="comment">//判断*dest是否为0，0则退出循环</span></span><br><span class="line">	<span class="keyword">while</span> (*dest++ = *source++)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="利用两种方式对字符串进行反转"><a href="#利用两种方式对字符串进行反转" class="headerlink" title="利用两种方式对字符串进行反转"></a>利用两种方式对字符串进行反转</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">\\	利用[]</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse_string</span><span class="params">(<span class="keyword">char</span>* str)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (str == <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> begin = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> end = <span class="built_in">strlen</span>(str) - <span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span> (begin &lt; end)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//交换两个字符元素</span></span><br><span class="line">		<span class="keyword">char</span> temp = str[begin];</span><br><span class="line">		str[begin] = str[end];</span><br><span class="line">		str[end] = temp;</span><br><span class="line"></span><br><span class="line">		begin++;</span><br><span class="line">		end--;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">\\	利用指针</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a>格式化字符串</h2><p>可以利用sprintf对字符串进行格式化</p>
+<p>sprintf(目标字符串, “格式”,占位参数…);</p>
+<p>拼接字符串    sprintf(buf,”%s %s”,str1,str2);</p>
+<p>数字转字符串    sprintf(buf, “%d”, num);</p>
+<p>右对齐：%8d    左对齐：%-8d    16进制：0x%x    8进制：0%o</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/03/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E9%87%8D%E9%9A%BE%E7%82%B9/" rel="prev" title="C语言编程重难点1">
+      <i class="fa fa-chevron-left"></i> C语言编程重难点1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-3/" rel="next" title="C语言编程重难点3">
+      C语言编程重难点3 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">函数调用流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">宏函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%83%AF%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">调用惯例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E6%8C%87%E9%92%88%E5%92%8C%E9%87%8E%E6%8C%87%E9%92%88"><span class="nav-number">2.</span> <span class="nav-text">空指针和野指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E6%8C%87%E9%92%88-%E2%80%94%E4%B8%8D%E5%85%81%E8%AE%B8%E5%90%91NULL%E5%92%8C%E9%9D%9E%E6%B3%95%E5%9C%B0%E5%9D%80%E6%8B%B7%E8%B4%9D%E5%86%85%E5%AD%98"><span class="nav-number">2.1.</span> <span class="nav-text">空指针 —不允许向NULL和非法地址拷贝内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8E%E6%8C%87%E9%92%88"><span class="nav-number">2.2.</span> <span class="nav-text">野指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E6%8C%87%E9%92%88%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%E9%87%8A%E6%94%BE-%EF%BC%8C%E4%BD%86%E6%98%AF%E9%87%8E%E6%8C%87%E9%92%88%E4%B8%8D%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%E9%87%8A%E6%94%BE"><span class="nav-number">2.3.</span> <span class="nav-text">空指针可以重复释放 ，但是野指针不可以重复释放</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E7%9A%84%E6%AD%A5%E9%95%BF"><span class="nav-number">3.</span> <span class="nav-text">指针的步长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E7%9A%84%E9%97%B4%E6%8E%A5%E8%B5%8B%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">指针的间接赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E5%81%9A%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%89%B9%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">指针做函数参数的输入输出特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BC%BA%E5%8C%96%E8%AE%AD%E7%BB%83"><span class="nav-number">6.</span> <span class="nav-text">字符串强化训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%AF%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9B%E8%A1%8C%E6%8B%B7%E8%B4%9D"><span class="nav-number">6.1.</span> <span class="nav-text">利用三种方式对字符串进行拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%AF%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9B%E8%A1%8C%E5%8F%8D%E8%BD%AC"><span class="nav-number">6.2.</span> <span class="nav-text">利用两种方式对字符串进行反转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">7.</span> <span class="nav-text">格式化字符串</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Redblue God"
+      src="/images/1.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Redblue God</p>
+  <div class="site-description" itemprop="description">记录我的学习轨迹</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Redblue God</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ooaYU06WA0sgNOwlzjgNzpn3-gzGzoHsz# <your app id>","app_key":"HUgD8AbO3HwobapDfm5o9jO8# <your app key>","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

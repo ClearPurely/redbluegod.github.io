@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="简介：暂无">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言编程重难点4">
+<meta property="og:url" content="http://example.com/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介：暂无">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-04T07:18:23.047Z">
+<meta property="article:modified_time" content="2021-06-04T07:19:16.359Z">
+<meta property="article:author" content="Redblue God">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C语言编程重难点4 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">沉梦昂志</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="Redblue God">
+      <meta itemprop="description" content="记录我的学习轨迹">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言编程重难点4
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-03 23:18:23 / 修改时间：23:19:16" itemprop="dateCreated datePublished" datetime="2021-06-03T23:18:23-08:00">2021-06-03</time>
+            </span>
+
+          
+            <span id="/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-4/" class="post-meta-item leancloud_visitors" data-flag-title="C语言编程重难点4" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>简介：暂无</p>
+<span id="more"></span>
+
+<h2 id="一维数组名称"><a href="#一维数组名称" class="headerlink" title="一维数组名称"></a>一维数组名称</h2><p>本质并不是一个指针</p>
+<p>有两种特殊情况</p>
+<p>​    对数组名称进行sizeof </p>
+<p>​    对数组名称 取地址 ，获取的指针步长是整个数组长度</p>
+<p>除了两种特殊情况外，都是指向数组中首元素的地址 的指针</p>
+<p>数组名— 指针常量，指针的指向不可以修改</p>
+<p>如果将数组名传入到函数参数中，为了提高可读性通常写为</p>
+<p>​      int arr[]</p>
+<p>访问数组元素时候，下标可以为负数</p>
+<h2 id="何定义数组的指针"><a href="#何定义数组的指针" class="headerlink" title="何定义数组的指针"></a>何定义数组的指针</h2><h4 id="先定义出数组的类型，再通过类型创建数组指针"><a href="#先定义出数组的类型，再通过类型创建数组指针" class="headerlink" title="先定义出数组的类型，再通过类型创建数组指针"></a>先定义出数组的类型，再通过类型创建数组指针</h4><p>typedef int(ARRAY_TYPE)[5];</p>
+<p>ARRAY__TYPE* arrP= &arr;</p>
+<h4 id="先定义数组指针的类型，再创建数组指针变量"><a href="#先定义数组指针的类型，再创建数组指针变量" class="headerlink" title="先定义数组指针的类型，再创建数组指针变量"></a>先定义数组指针的类型，再创建数组指针变量</h4><p>typedef int(*ARRAY_TYPE)[5];</p>
+<p>ARRAY_TYPE arrp = &ars;</p>
+<h4 id="直接创建数组指针变量"><a href="#直接创建数组指针变量" class="headerlink" title="直接创建数组指针变量"></a>直接创建数组指针变量</h4><p>语法:数组元素类型(*数组指针变量名称)[元素个数]</p>
+<p>int(*pArr)[5] = &arr;</p>
+<h2 id="二维数组名称"><a href="#二维数组名称" class="headerlink" title="二维数组名称"></a>二维数组名称</h2><h4 id="除了两种特殊情况外，都是指向第一个一维数组的指针"><a href="#除了两种特殊情况外，都是指向第一个一维数组的指针" class="headerlink" title="除了两种特殊情况外，都是指向第一个一维数组的指针"></a>除了两种特殊情况外，都是指向第一个一维数组的指针</h4><h4 id="两种特殊情况"><a href="#两种特殊情况" class="headerlink" title="两种特殊情况"></a>两种特殊情况</h4><p>sizeof 统计整个二维数组长度</p>
+<p>对数组名称取地址  int(*p2)[3][3] = &arr;</p>
+<h4 id="二维数组做函数参数传递方式"><a href="#二维数组做函数参数传递方式" class="headerlink" title="二维数组做函数参数传递方式"></a>二维数组做函数参数传递方式</h4><p>void printArray( int p[][3] , int row, int col)</p>
+<p>void printArray(int p[3][3], int row, int col)  可读性高</p>
+<p>void printArray( int(*p)[3] , int row ,int col)    访问困难</p>
+<h4 id="二维数组数组指针的定义方式"><a href="#二维数组数组指针的定义方式" class="headerlink" title="二维数组数组指针的定义方式."></a>二维数组数组指针的定义方式.</h4><p>int(*p) [3][3]= &arr;</p>
+<h4 id="数组指针-指针数组-区别"><a href="#数组指针-指针数组-区别" class="headerlink" title="数组指针 指针数组 区别"></a>数组指针 指针数组 区别</h4><p>数组指针 是一个指向数组的指针 int (*p)[10];</p>
+<p>指针数组 是一个存放指针的数组 int * p[10];    访问困难</p>
+<h2 id="指针数组的排序"><a href="#指针数组的排序" class="headerlink" title="指针数组的排序"></a>指针数组的排序</h2><h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>假设排序规则为从小到大</p>
+<p>先认定一个最小值下标为i，通过j = i+1找的真实最小值下标</p>
+<p>判断计算出的真实最小值下标 和开始认定的i是否相等，如果不相等，交换i和min下标的两个元素</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> min = i;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; len; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (arr[min] &gt; arr[j]) &#123;</span><br><span class="line">				<span class="comment">//更新真实最小值下标</span></span><br><span class="line">				min = j;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//判断认定i和min是否一样，如果不一样，交换这两个下标对应的元素</span></span><br><span class="line">			<span class="keyword">if</span> (i != min)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> temp = arr[i];</span><br><span class="line">				arr[i] = arr[min];</span><br><span class="line">				arr[min] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="对指针数据进行从大到小排序"><a href="#对指针数据进行从大到小排序" class="headerlink" title="对指针数据进行从大到小排序"></a>对指针数据进行从大到小排序</h4><h2 id="结构体基本使用"><a href="#结构体基本使用" class="headerlink" title="结构体基本使用"></a>结构体基本使用</h2><p>如果有typedef 定义结构体，那么后面跟着的单词是类型的别名</p>
+<p>没有typedef，定义结构体，后面跟着的单词是一个<strong>结构体变量</strong></p>
+<h4 id="结构体数组"><a href="#结构体数组" class="headerlink" title="结构体数组"></a>结构体数组</h4><p>在栈上开辟</p>
+<p>在堆区开辟</p>
+<h2 id="结构体赋值问题以及解决"><a href="#结构体赋值问题以及解决" class="headerlink" title="结构体赋值问题以及解决"></a>结构体赋值问题以及解决</h2><p>系统提供的赋值操作是简单的值拷贝，逐字节拷贝—- 浅拷贝</p>
+<p>如果属性中有指向堆区的内容，在释放期间会导致堆区重复释放，并且还有内存泄露</p>
+<p>解决方案：利用深拷贝，手动赋值</p>
+<h2 id="练习-结构体嵌套一级指针"><a href="#练习-结构体嵌套一级指针" class="headerlink" title="练习 结构体嵌套一级指针"></a>练习 结构体嵌套一级指针</h2><p>设计结构体 struct Person { char * name,int age }</p>
+<p>在堆区创建 结构体指针数组  malloc(sizeof(struct Person *) * 3);</p>
+<p>给每个结构体也分配到堆区</p>
+<p>给每个结构体的姓名分配到堆区</p>
+<p>打印数组中所有人的信息</p>
+<p>释放堆区数据</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-3/" rel="prev" title="C语言编程重难点3">
+      <i class="fa fa-chevron-left"></i> C语言编程重难点3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/03/C%E8%AF%AD%E8%A8%80%E9%AB%98%E7%BA%A7-5/" rel="next" title="C语言编程重难点5">
+      C语言编程重难点5 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E5%90%8D%E7%A7%B0"><span class="nav-number">1.</span> <span class="nav-text">一维数组名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%95%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88"><span class="nav-number">2.</span> <span class="nav-text">何定义数组的指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%88%E5%AE%9A%E4%B9%89%E5%87%BA%E6%95%B0%E7%BB%84%E7%9A%84%E7%B1%BB%E5%9E%8B%EF%BC%8C%E5%86%8D%E9%80%9A%E8%BF%87%E7%B1%BB%E5%9E%8B%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88"><span class="nav-number">2.0.1.</span> <span class="nav-text">先定义出数组的类型，再通过类型创建数组指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%88%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E7%9A%84%E7%B1%BB%E5%9E%8B%EF%BC%8C%E5%86%8D%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F"><span class="nav-number">2.0.2.</span> <span class="nav-text">先定义数组指针的类型，再创建数组指针变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F"><span class="nav-number">2.0.3.</span> <span class="nav-text">直接创建数组指针变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E5%90%8D%E7%A7%B0"><span class="nav-number">3.</span> <span class="nav-text">二维数组名称</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%A4%E4%BA%86%E4%B8%A4%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5%E5%A4%96%EF%BC%8C%E9%83%BD%E6%98%AF%E6%8C%87%E5%90%91%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88"><span class="nav-number">3.0.1.</span> <span class="nav-text">除了两种特殊情况外，都是指向第一个一维数组的指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5"><span class="nav-number">3.0.2.</span> <span class="nav-text">两种特殊情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E5%81%9A%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E6%96%B9%E5%BC%8F"><span class="nav-number">3.0.3.</span> <span class="nav-text">二维数组做函数参数传递方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%E7%9A%84%E5%AE%9A%E4%B9%89%E6%96%B9%E5%BC%8F"><span class="nav-number">3.0.4.</span> <span class="nav-text">二维数组数组指针的定义方式.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88-%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84-%E5%8C%BA%E5%88%AB"><span class="nav-number">3.0.5.</span> <span class="nav-text">数组指针 指针数组 区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E7%9A%84%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">指针数组的排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-number">4.0.1.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%8C%87%E9%92%88%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F%E6%8E%92%E5%BA%8F"><span class="nav-number">4.0.2.</span> <span class="nav-text">对指针数据进行从大到小排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">结构体基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84"><span class="nav-number">5.0.1.</span> <span class="nav-text">结构体数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E8%B5%8B%E5%80%BC%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3"><span class="nav-number">6.</span> <span class="nav-text">结构体赋值问题以及解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-%E7%BB%93%E6%9E%84%E4%BD%93%E5%B5%8C%E5%A5%97%E4%B8%80%E7%BA%A7%E6%8C%87%E9%92%88"><span class="nav-number">7.</span> <span class="nav-text">练习 结构体嵌套一级指针</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Redblue God"
+      src="/images/1.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Redblue God</p>
+  <div class="site-description" itemprop="description">记录我的学习轨迹</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Redblue God</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ooaYU06WA0sgNOwlzjgNzpn3-gzGzoHsz# <your app id>","app_key":"HUgD8AbO3HwobapDfm5o9jO8# <your app key>","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
